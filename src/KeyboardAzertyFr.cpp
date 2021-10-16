@@ -121,15 +121,15 @@ const uint8_t _asciimapFr[128] =
 	0x2c,          //  ' '
 	0x38,          // !
 	0x20,          // "
-	0x20|SHIFT,    // #
+	0x20|SHIFT,    // # TODO
 	0x30,          // $
-	0x34|SHIFT,    // % (todo)
+	0x34|SHIFT,    // %
 	0x1E,          // &
 	0x21,          // '
 	0x22,         // (
 	0x2d,         // )
 	0x31,         // *
-	0x2b|SHIFT,    // +
+	0x2e|SHIFT,    // +
 	0x10,          // ,
 	0x23,          // -
 	0x36|SHIFT,    // .
@@ -150,7 +150,7 @@ const uint8_t _asciimapFr[128] =
 	0x2e,          // =
 	0x64|SHIFT,    // >
 	0x10|SHIFT,    // ?
-	0x1f,          // @ (todo)
+	0x1f,          // @ TODO
 	0x14|SHIFT,    // A
 	0x05|SHIFT,    // B
 	0x06|SHIFT,    // C
@@ -178,9 +178,9 @@ const uint8_t _asciimapFr[128] =
 	0x1c|SHIFT,    // Y
 	0x1a|SHIFT,    // Z
 	0x0c,          // [ TODO 2F
-	0x31,          // bslash
+	0x31,          // bslash TODO
 	0x0d,          // ] TODO 30
-	0x2F,          // ^
+	0x2F,          // ^ TODO
 	0x25,          // _
 	0x35,          // ` TODO
 	0x14,          // a
@@ -209,7 +209,7 @@ const uint8_t _asciimapFr[128] =
 	0x1b,          // x
 	0x1c,          // y
 	0x1a,          // z
-	0x2f|SHIFT,    // {
+	0x2f|SHIFT,    // { TODO
 	0x31|SHIFT,    // | TODO
 	0x30|SHIFT,    // } TODO
 	0x35|SHIFT,    // ~ TODO
