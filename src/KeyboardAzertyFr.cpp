@@ -82,7 +82,20 @@ void KeyboardAzertyFr_::sendReport(KeyReportFr* keys)
 extern
 const uint8_t _asciimapFr[128] PROGMEM;
 
+// Map ASCII character codes to key codes.
+//
+// All key codes are less than 0x80, which makes bit 7 available to
+// signal that a modifier (Shift or AltGr) is needed to generate the
+// character. With only one exception, keys that are used with modifiers
+// have codes that are less than 0x40. This makes bit 6 available to
+// signal whether the modifier is Shift or AltGr. The exception is 0x64,
+// the key next next to Left Shift on the ISO layout (and absent from
+// the ANSI layout). We handle it by replacing its value by 0x32 in this
+// ASCII map.
 #define SHIFT 0x80
+#define ALT_GR 0xc0
+#define ISO_KEY 0x64
+#define ISO_REPLACEMENT 0x32
 const uint8_t _asciimapFr[128] =
 {
 	0x00,             // NUL
@@ -121,7 +134,7 @@ const uint8_t _asciimapFr[128] =
 	0x2c,          //  ' '
 	0x38,          // !
 	0x20,          // "
-	0x20|SHIFT,    // # TODO
+	0x20|ALT_GR,   // #
 	0x30,          // $
 	0x34|SHIFT,    // %
 	0x1E,          // &
@@ -146,11 +159,11 @@ const uint8_t _asciimapFr[128] =
 	0x26|SHIFT,    // 9
 	0x37,          // :
 	0x36,          // ;
-	0x64,          // <
+	0x32,          // <
 	0x2e,          // =
-	0x64|SHIFT,    // >
+	0x32|SHIFT,    // >
 	0x10|SHIFT,    // ?
-	0x1f,          // @ TODO
+	0x27|ALT_GR,   // @
 	0x14|SHIFT,    // A
 	0x05|SHIFT,    // B
 	0x06|SHIFT,    // C
@@ -177,12 +190,12 @@ const uint8_t _asciimapFr[128] =
 	0x1b|SHIFT,    // X
 	0x1c|SHIFT,    // Y
 	0x1a|SHIFT,    // Z
-	0x0c,          // [ TODO 2F
-	0x31,          // bslash TODO
-	0x0d,          // ] TODO 30
-	0x2F,          // ^ TODO
+	0x22|ALT_GR,   // [
+	0x25|ALT_GR,   // bslash
+	0x2d|ALT_GR,   // ]
+	0x26|ALT_GR,   // ^
 	0x25,          // _
-	0x35,          // ` TODO
+	0x24|ALT_GR,   // `
 	0x14,          // a
 	0x05,          // b
 	0x06,          // c
@@ -209,10 +222,10 @@ const uint8_t _asciimapFr[128] =
 	0x1b,          // x
 	0x1c,          // y
 	0x1a,          // z
-	0x2f|SHIFT,    // { TODO
-	0x31|SHIFT,    // | TODO
-	0x30|SHIFT,    // } TODO
-	0x35|SHIFT,    // ~ TODO
+	0x21|ALT_GR,   // {
+	0x23|ALT_GR,   // |
+	0x2e|ALT_GR,   // }
+	0x1f|ALT_GR,   // ~
 	0              // DEL
 };
 
@@ -237,10 +250,15 @@ size_t KeyboardAzertyFr_::press(uint8_t k)
 			setWriteError();
 			return 0;
 		}
-		if (k & 0x80) {						// it's a capital letter or other character reached with shift
+		if ((k & ALT_GR) == ALT_GR) {
+			_keyReport.modifiers |= 0x40;	// AltGr = right Alt
+			k &= 0x3F;
+		} else if ((k & SHIFT) == SHIFT) {
 			_keyReport.modifiers |= 0x02;	// the left shift modifier
 			k &= 0x7F;
 		}
+		if (k == ISO_REPLACEMENT)
+			k = ISO_KEY;
 	}
 
 	// Add k to the key report only if it's not already present
@@ -280,10 +298,15 @@ size_t KeyboardAzertyFr_::release(uint8_t k)
 		if (!k) {
 			return 0;
 		}
-		if (k & 0x80) {							// it's a capital letter or other character reached with shift
+		if ((k & ALT_GR) == ALT_GR) {
+			_keyReport.modifiers &= ~(0x40);	// AltGr = right Alt
+			k &= 0x3F;
+		} else if ((k & SHIFT) == SHIFT) {
 			_keyReport.modifiers &= ~(0x02);	// the left shift modifier
 			k &= 0x7F;
 		}
+		if (k == ISO_REPLACEMENT)
+			k = ISO_KEY;
 	}
 
 	// Test the key report to see if k is present.  Clear it if it exists.
