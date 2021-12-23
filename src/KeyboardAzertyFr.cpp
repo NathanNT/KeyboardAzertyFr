@@ -98,40 +98,40 @@ const uint8_t _asciimapFr[128] PROGMEM;
 #define ISO_REPLACEMENT 0x32
 const uint8_t _asciimapFr[128] =
 {
-	0x00,             // NUL
-	0x00,             // SOH
-	0x00,             // STX
-	0x00,             // ETX
-	0x00,             // EOT
-	0x00,             // ENQ
-	0x00,             // ACK
-	0x00,             // BEL
-	0x2a,             // BS	Backspace
-	0x2b,             // TAB	Tab
-	0x28,             // LF	Enter
-	0x00,             // VT
-	0x00,             // FF
-	0x00,             // CR
-	0x00,             // SO
-	0x00,             // SI
-	0x00,             // DEL
-	0x00,             // DC1
-	0x00,             // DC2
-	0x00,             // DC3
-	0x00,             // DC4
-	0x00,             // NAK
-	0x00,             // SYN
-	0x00,             // ETB
-	0x00,             // CAN
-	0x00,             // EM
-	0x00,             // SUB
-	0x00,             // ESC
-	0x00,             // FS
-	0x00,             // GS
-	0x00,             // RS
-	0x00,             // US
+	0x00,          // NUL
+	0x00,          // SOH
+	0x00,          // STX
+	0x00,          // ETX
+	0x00,          // EOT
+	0x00,          // ENQ
+	0x00,          // ACK
+	0x00,          // BEL
+	0x2a,          // BS  Backspace
+	0x2b,          // TAB Tab
+	0x28,          // LF  Enter
+	0x00,          // VT
+	0x00,          // FF
+	0x00,          // CR
+	0x00,          // SO
+	0x00,          // SI
+	0x00,          // DEL
+	0x00,          // DC1
+	0x00,          // DC2
+	0x00,          // DC3
+	0x00,          // DC4
+	0x00,          // NAK
+	0x00,          // SYN
+	0x00,          // ETB
+	0x00,          // CAN
+	0x00,          // EM
+	0x00,          // SUB
+	0x00,          // ESC
+	0x00,          // FS
+	0x00,          // GS
+	0x00,          // RS
+	0x00,          // US
 
-	0x2c,          //  ' '
+	0x2c,          // ' '
 	0x38,          // !
 	0x20,          // "
 	0x20|ALT_GR,   // #
@@ -139,9 +139,9 @@ const uint8_t _asciimapFr[128] =
 	0x34|SHIFT,    // %
 	0x1E,          // &
 	0x21,          // '
-	0x22,         // (
-	0x2d,         // )
-	0x31,         // *
+	0x22,          // (
+	0x2d,          // )
+	0x31,          // *
 	0x2e|SHIFT,    // +
 	0x10,          // ,
 	0x23,          // -
@@ -226,7 +226,7 @@ const uint8_t _asciimapFr[128] =
 	0x23|ALT_GR,   // |
 	0x2e|ALT_GR,   // }
 	0x1f|ALT_GR,   // ~
-	0              // DEL
+	0x00           // DEL
 };
 
 
